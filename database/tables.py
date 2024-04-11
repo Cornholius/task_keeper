@@ -6,7 +6,7 @@ metadata = MetaData()
 task = Table(
     'task',
     metadata,
-    Column('id', Integer, primary_key=True),
+    Column('id', Integer, primary_key=True, autoincrement=True),
     Column('title', String, nullable=False),
     Column('data', String),
     Column('owner', String)
