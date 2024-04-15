@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 from fastapi_users import FastAPIUsers
 from auth.auth import auth_backend
-from database.database import User
+from database.models import User
 from auth.manager import get_user_manager
 # from auth.router import router as auth_router
 from auth.schemas import UserCreate, UserRead
+from database.db import async_session_maker
+from sqlalchemy import select
 
 
 app = FastAPI(title='Заметки')
@@ -24,3 +26,12 @@ app.include_router(
     prefix="/auth",
     tags=["Регистрация"],
 )
+
+
+@app.get('/all_users')
+async def all_users():
+    async with async_session_maker() as session:
+        result = await session.execute(select(User))
+        # result = await session.query(User)
+    for i in result.all():
+        print(i, type(i))
