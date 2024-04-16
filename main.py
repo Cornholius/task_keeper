@@ -1,12 +1,12 @@
 from fastapi import FastAPI
 from fastapi_users import FastAPIUsers
+from sqlalchemy import select
 from auth.auth import auth_backend
-from database.models import User
 from auth.manager import get_user_manager
-# from auth.router import router as auth_router
+from auth.models import User
 from auth.schemas import UserCreate, UserRead
 from database.db import async_session_maker
-from sqlalchemy import select
+from task.routers import router as TaskRouter
 
 
 app = FastAPI(title='Заметки')
@@ -26,6 +26,8 @@ app.include_router(
     prefix="/auth",
     tags=["Регистрация"],
 )
+
+app.include_router(TaskRouter, prefix='/tasks', tags=['Задачи'])
 
 
 @app.get('/all_users')

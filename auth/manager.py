@@ -1,9 +1,11 @@
 from typing import Optional
 from fastapi import Depends, Request
 from fastapi_users import BaseUserManager, IntegerIDMixin
-from database.db import get_user_db
-from database.models import User
+from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
+from sqlalchemy.ext.asyncio import AsyncSession
+from auth.models import User
 from config import SECRET_MANAGER
+from database.db import get_async_session
 
 
 SECRET = SECRET_MANAGER
@@ -24,6 +26,10 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
 
     async def on_after_login(self, user, request=None, response=None) -> None:
         print(f'User {user.name.title()} is logged in')
+
+
+async def get_user_db(session: AsyncSession = Depends(get_async_session)):
+    yield SQLAlchemyUserDatabase(session, User)
 
 
 async def get_user_manager(user_db=Depends(get_user_db)):
