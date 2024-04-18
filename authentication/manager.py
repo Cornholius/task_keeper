@@ -3,7 +3,7 @@ from fastapi import Depends, Request
 from fastapi_users import BaseUserManager, IntegerIDMixin
 from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
 from sqlalchemy.ext.asyncio import AsyncSession
-from auth.models import User
+from authentication.models import User
 from config import SECRET_MANAGER
 from database.db import get_async_session
 

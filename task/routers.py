@@ -1,6 +1,9 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
+
+from authentication.models import User
+from authentication.auth import current_active_user
 from database.db import get_async_session
 from task.models import Task
 from task.schemas import GetTaskSchema, AddTaskSchema, PatchTaskSchema
@@ -16,7 +19,7 @@ async def get_current_task(pk: int, session: AsyncSession = Depends(get_async_se
 
 
 @router.get('/get_all')
-async def get_all_tasks(session: AsyncSession = Depends(get_async_session)):
+async def get_all_tasks(session: AsyncSession = Depends(get_async_session), user: User = Depends(current_active_user)):
     query = select(Task)
     res = await session.execute(query)
     result = [GetTaskSchema.model_validate(row[0], from_attributes=True) for row in res.all()]
