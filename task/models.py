@@ -1,6 +1,9 @@
-from dataclasses import dataclass
 from sqlalchemy.orm import mapped_column, Mapped
-from database.db import Base
+from sqlalchemy.orm import DeclarativeBase
+
+
+class Base(DeclarativeBase):
+    pass
 
 
 class Task(Base):
