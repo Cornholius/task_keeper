@@ -5,7 +5,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from auth.manager import get_user_manager
 from auth.schemas import UserCreate, UserRead
 from auth.auth import auth_backend
-from auth.database import User, get_async_session
+from database.database import get_async_session
+from database.database import User
 
 
 fastapi_users = FastAPIUsers[User, int](get_user_manager, [auth_backend])
@@ -17,9 +18,12 @@ current_user = fastapi_users.current_user()
 
 @router.get('/all_users', tags=['Пользователи'])
 async def all_users(session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
-    statement = select(User)
-    user_obj = await session.scalars(statement)
-    return user_obj.all()
+    if user.is_superuser:
+        statement = select(User)
+        user_obj = await session.scalars(statement)
+        return user_obj.all()
+    else:
+        return {"status": 401, "message": "you are not superuser"}
 
 
 @router.get("/protected-route")
