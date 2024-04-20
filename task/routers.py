@@ -29,7 +29,11 @@ async def get_all_tasks(session: AsyncSession = Depends(get_async_session), user
 @router.post('/add')
 async def add_new_task(request: AddTaskSchema, session: AsyncSession = Depends(get_async_session),
                        user: User = Depends(current_user)):
-    session.add(Task())
+    session.add(Task(
+        title=request.title,
+        data=request.data,
+        owner=user.email)
+    )
     await session.commit()
 
 

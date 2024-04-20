@@ -12,7 +12,6 @@ class GetTaskSchema(BaseModel):
 class AddTaskSchema(BaseModel):
     title: Optional[str]
     data: str
-    owner: str
 
 
 class PatchTaskSchema(BaseModel):
