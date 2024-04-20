@@ -18,9 +18,13 @@ current_user = fastapi_users.current_user()
 
 @router.get('/all_users', tags=['Пользователи'])
 async def all_users(session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
-    if user.is_superuser:
+    if not user.is_superuser:
         statement = select(User)
-        user_obj = await session.scalars(statement)
-        return user_obj.all()
+        # user_obj = await session.scalars(statement)
+        result = await session.execute(statement)
+        user_obj = result.unique().scalars().all()
+        for i in user_obj:
+            print(i.name, i.task_list)
+        return user_obj
     else:
         return {"status": 401, "message": "you are not superuser"}
