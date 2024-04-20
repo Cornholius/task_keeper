@@ -16,5 +16,5 @@ class AddTaskSchema(BaseModel):
 
 
 class PatchTaskSchema(BaseModel):
-    title: Optional[str]
-    data: str
+    title: Optional[str] = None
+    data: Optional[str] = None

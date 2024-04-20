@@ -11,8 +11,8 @@ from database.database import User
 
 fastapi_users = FastAPIUsers[User, int](get_user_manager, [auth_backend])
 router = APIRouter()
-router.include_router(fastapi_users.get_auth_router(auth_backend), tags=["Аутентификация"])
-router.include_router(fastapi_users.get_register_router(UserRead, UserCreate), tags=["Регистрация"])
+router.include_router(fastapi_users.get_auth_router(auth_backend))
+router.include_router(fastapi_users.get_register_router(UserRead, UserCreate))
 current_user = fastapi_users.current_user()
 
 
@@ -24,8 +24,3 @@ async def all_users(session: AsyncSession = Depends(get_async_session), user: Us
         return user_obj.all()
     else:
         return {"status": 401, "message": "you are not superuser"}
-
-
-@router.get("/protected-route")
-def ololo(user: User = Depends(current_user)):
-    return f"Hello, {user.name}"
