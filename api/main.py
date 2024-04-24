@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from task.routers import router as task_router
-from auth.routers import router as auth_router
+from api.task.routers import router as task_router
+from api.auth.routers import router as auth_router
 
 
 app = FastAPI(title='Заметки')

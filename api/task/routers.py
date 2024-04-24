@@ -2,10 +2,10 @@ from fastapi import APIRouter, Depends
 from sqlalchemy import select
 from sqlalchemy.orm import selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
-from database.database import get_async_session
-from database.models import User, Task
-from auth.routers import current_user
-from task.schemas import AddTaskSchema, PatchTaskSchema
+from api.database.database import get_async_session
+from api.database.models import User, Task
+from api.auth.routers import current_user
+from api.task.schemas import AddTaskSchema, PatchTaskSchema
 
 
 router = APIRouter()

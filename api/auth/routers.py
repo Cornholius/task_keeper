@@ -2,11 +2,11 @@ from fastapi import APIRouter, Depends
 from fastapi_users import FastAPIUsers
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from auth.manager import get_user_manager
-from auth.schemas import UserCreate, UserRead
-from auth.auth import auth_backend
-from database.database import get_async_session
-from database.database import User
+from api.auth.manager import get_user_manager
+from api.auth.schemas import UserCreate, UserRead
+from api.auth.auth import auth_backend
+from api.database.database import get_async_session
+from api.database.database import User
 
 
 fastapi_users = FastAPIUsers[User, int](get_user_manager, [auth_backend])

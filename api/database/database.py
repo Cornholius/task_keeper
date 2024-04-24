@@ -3,8 +3,8 @@ from fastapi import Depends
 from fastapi_users.db import SQLAlchemyUserDatabase
 from sqlalchemy import MetaData
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-from config import DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME
-from models import User
+from api.config import DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME
+from .models import User
 
 
 DATABASE_URL = f"postgresql+asyncpg://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"

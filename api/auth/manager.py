@@ -1,9 +1,9 @@
 from typing import Optional
 from fastapi import Depends, Request
 from fastapi_users import BaseUserManager, IntegerIDMixin
-from database.database import get_user_db
-from database.database import User
-from config import SECRET
+from api.database.database import get_user_db
+from api.database.database import User
+from api.config import SECRET
 
 
 class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
