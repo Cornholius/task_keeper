@@ -1,0 +1,11 @@
+migrations
+config.py
+start_uvicorn.ps1
+alembic.ini
+__pycache__
+.idea
+frontend/node_modules
+api/__pycache__
+api/migrations/
+api/config.py
+
