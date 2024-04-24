@@ -9,10 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "babel": "^6.23.0",
     "eslint": "8.57.0",
     "eslint-config-next": "14.2.2",
-    "next": "14.2.2",
+    "next": "^14.2.2",
+    "npx": "^10.2.2",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "sass": "^1.75.0",
+    "update": "^0.7.4"
   }
 }
