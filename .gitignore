@@ -1,5 +1,5 @@
 migrations
-config.py
+api/config.py
 start_uvicorn.ps1
 alembic.ini
 __pycache__

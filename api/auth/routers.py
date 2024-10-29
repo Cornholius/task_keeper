@@ -28,3 +28,26 @@ async def all_users(session: AsyncSession = Depends(get_async_session), user: Us
         return user_obj
     else:
         return {"status": 401, "message": "you are not superuser"}
+
+
+@router.get('/user', tags=['Пользователи'])
+async def user(session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
+    print(session)
+    print(user)
+    if not user.is_superuser:
+        statement = select(User)
+        # user_obj = await session.scalars(statement)
+        result = await session.execute(statement)
+        user_obj = result.unique().scalars().first()
+        # for i in user_obj:
+        #     print(i.name, i.task_list)
+        return user_obj
+    else:
+        return {"status": 401, "message": "you are not superuser"}
+
+
+@router.get('/user2', tags=['Пользователи'])
+async def user2(session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
+    print('ololo0')
+    print(session)
+    print(user)
