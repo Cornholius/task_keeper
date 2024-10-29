@@ -46,3 +46,7 @@ async def user(session: AsyncSession = Depends(get_async_session), user: User = 
         return user_obj
     else:
         return {"status": 401, "message": "you are not superuser"}
+
+@router.get("/authenticated-route")
+async def authenticated_route(user: User = Depends(current_user)):
+    return {"message": f"Hello {user.email}!"}

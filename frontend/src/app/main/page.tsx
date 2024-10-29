@@ -2,21 +2,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
-
+import { useRouter } from 'next/navigation'
+import IsAuthenticated from '@/services/IsAuthenticated'
 
 export default function Home() {
+  const router = useRouter();
 
-  useEffect(() => {
-    (
-      async () => {
-        const response = await fetch(
-          'http://127.0.0.1:8000/auth/user2', {method: 'GET', credentials: "include"})
-        const content = await response.json()
-        console.log(content)
-      }
-    )()
-  })
-
+  useEffect(() => { IsAuthenticated(router, localStorage.getItem('Keeper')) })
 
   return (
     <section className="h-screen flex flex-col items-center justify-center">
