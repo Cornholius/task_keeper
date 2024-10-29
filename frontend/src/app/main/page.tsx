@@ -10,7 +10,7 @@ export default function Home() {
     (
       async () => {
         const response = await fetch(
-          'http://127.0.0.1:8000/auth/user2', {method: 'GET', credentials: "same-origin"})
+          'http://127.0.0.1:8000/auth/user2', {method: 'GET', credentials: "include"})
         const content = await response.json()
         console.log(content)
       }

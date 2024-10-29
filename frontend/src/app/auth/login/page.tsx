@@ -25,6 +25,7 @@ export default function Auth_page() {
       })
 
       const responce = await request.ok
+      console.log(request)
       if(responce) {
         await router.push('/main')
       } else {
