@@ -6,29 +6,27 @@ import RegisterRequest from '@/services/RegisterRequest'
 import LoginRequest from "@/services/LoginRequest";
 
 export default function Auth_page() {
-
   const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
   const [pass2, setPass2] = useState('')
   const [name, setName] = useState('')
   const [lastname, setLastName] = useState('')
+  const [msg, setMsg] = useState()
   const router = useRouter();
 
   const Register = async (e: SyntheticEvent) => {
     e.preventDefault();
-    let Msg
     const data = {
       "email": email,
       "password": pass,
       "name": name
     }
     if (lastname) { data.name = name + ' ' + lastname }
-    if (pass == pass2) { Msg = await RegisterRequest(data) }
-    if (Msg == true) {
+    if (pass == pass2) { setMsg(await RegisterRequest(data)) }
+    if (msg == true) {
       await LoginRequest(email, pass)
       router.push('/main')
     }
-    else { alert(Msg) }
   }
 
   return (
@@ -36,6 +34,7 @@ export default function Auth_page() {
       <h3 className="text-3xl font-semibold tracking-[-0.015em] text-white">Регистрация</h3>
 
       <form onSubmit={Register} className="mt-6">
+        <label className="select-none text-xl text-red-500">{msg}</label>
         <div className="mt-4">
           <label className="select-none text-xl text-white">Почта</label>
           <input id="email" name="email" type="email" onChange={e => setEmail(e.target.value)} className="block w-full px-4 py-2 mt-2 text-white bg-zinc-700 border rounded-md focus:border-zinc-300 focus:ring-zinc-300 focus:outline-none focus:ring focus:ring-opacity-40" />

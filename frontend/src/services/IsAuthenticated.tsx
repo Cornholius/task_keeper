@@ -1,13 +1,16 @@
-export default async function IsAuthenticated(router, token) {
-    const { host } = require('@/config.json')
+// import { useRouter } from "next/navigation"
+import { host as host } from '@/config.json'
+
+export default async function IsAuthenticated() {
     const request = await fetch(
         host + 'auth/user',
         {
-            headers: { "Authorization": "Bearer " + token },
+            headers: { "Authorization": "Bearer " + localStorage.getItem('Keeper') },
             credentials: "include",
         }
-    ).then(response => response.json())
-    if (!request['is_active']) {
-        router.push('/auth/login')
-    }
+    )
+    const response = await request.json()
+    console.log(request.ok)
+    if (request.ok) { return { "name": response.name, "email": response.email } }
+    // else { console.log('пошёл нахуй'); router.push('/auth/login') }
 }

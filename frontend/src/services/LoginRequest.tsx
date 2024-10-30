@@ -12,10 +12,13 @@ export default async function LoginRequest(email, pass) {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       credentials: "include",
       body: new URLSearchParams({ 'username': email, 'password': pass })
-    }).then(response => response.json())
+    })
+  const response = await request.json()
 
-  if (request.access_token) {
-    localStorage.setItem('Keeper', request['access_token'])
-    return true
+  if (request.ok) {
+    localStorage.setItem('Keeper', response.access_token)
+    return request.ok
   }
-} 
+  else { return "Неправильный логин или пароль" }
+  // else { return response.detail }
+}
