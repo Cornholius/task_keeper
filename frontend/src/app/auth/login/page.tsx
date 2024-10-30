@@ -4,6 +4,7 @@ import React, { useState, useEffect, SyntheticEvent } from "react"
 import { useRouter } from 'next/navigation'
 import LoginRequest from '@/services/LoginRequest'
 
+
 export default function Auth_page() {
 
   const ErrorMsg = ''

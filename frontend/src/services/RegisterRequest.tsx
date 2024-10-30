@@ -1,10 +1,9 @@
-import { host } from "@/config.json"
+import { host as path } from "@/config.json"
 
 
-export default async function RegisterRequest(data) {
-    console.log('data: ', data)
+export default async function RegisterRequest(data: { email: string; password: string; name: string }) {
     const request = await fetch(
-        host + "auth/register",
+        path + "auth/register",
         {
             method: 'POST',
             headers: { "Content-Type": "application/json" },

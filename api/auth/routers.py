@@ -46,6 +46,9 @@ async def user(session: AsyncSession = Depends(get_async_session), user: User = 
         return {"status": 401, "message": "you are not superuser"}
 
 
+
+
+
 @router.get("/test")
 async def authenticated_route(session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
     from ..database.database import engine

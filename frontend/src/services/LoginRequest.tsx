@@ -1,12 +1,9 @@
-import { useRouter } from "next/router"
-import { host } from "@/config.json"
+import { host as path} from "@/config.json"
 
 
-const router = useRouter
-
-export default async function LoginRequest(email, pass) {
+export default async function LoginRequest(email: string, pass: string) {
   const request = await fetch(
-    host + "auth/login",
+    path + "auth/login",
     {
       method: 'POST',
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -20,5 +17,4 @@ export default async function LoginRequest(email, pass) {
     return request.ok
   }
   else { return "Неправильный логин или пароль" }
-  // else { return response.detail }
 }

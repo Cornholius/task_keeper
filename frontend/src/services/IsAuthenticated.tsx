@@ -1,4 +1,4 @@
-// import { useRouter } from "next/navigation"
+
 import { host as host } from '@/config.json'
 
 export default async function IsAuthenticated() {
@@ -12,5 +12,4 @@ export default async function IsAuthenticated() {
     const response = await request.json()
     console.log(request.ok)
     if (request.ok) { return { "name": response.name, "email": response.email } }
-    // else { console.log('пошёл нахуй'); router.push('/auth/login') }
 }
