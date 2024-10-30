@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request
 from fastapi_users import FastAPIUsers
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -47,6 +47,7 @@ async def user(session: AsyncSession = Depends(get_async_session), user: User = 
     else:
         return {"status": 401, "message": "you are not superuser"}
 
-@router.get("/authenticated-route")
-async def authenticated_route(user: User = Depends(current_user)):
-    return {"message": f"Hello {user.email}!"}
+@router.get("/test")
+async def authenticated_route(request: Request, user: User = Depends(current_user)):
+    print('!!!', request.headers)
+    return {"1": request.headers}

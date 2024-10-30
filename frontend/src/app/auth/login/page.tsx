@@ -2,31 +2,19 @@
 import Link from "next/link";
 import React, { useState, useEffect, SyntheticEvent } from "react"
 import { useRouter } from 'next/navigation'
+import LoginRequest from '@/services/LoginRequest'
 
 export default function Auth_page() {
+
+  const ErrorMsg = ''
   const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
   const router = useRouter();
 
   const Login = async (e: SyntheticEvent) => {
     e.preventDefault();
-
-    const request = await fetch(
-      "http://127.0.0.1:8000/auth/login",
-      {
-        method: 'POST',
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        credentials: "include",
-        body: new URLSearchParams({
-          'username': email,
-          'password': pass
-        })
-      }).then(response => response.json())
-
-    if (request['access_token']) {
-      localStorage.setItem('Keeper', request['access_token'])
-      router.push('/main')
-    }
+    if (await LoginRequest(email, pass)) { router.push('/main') }
+    else { alert('Неправильный логин или пароль') }
   }
 
   return (
@@ -35,7 +23,7 @@ export default function Auth_page() {
 
       <form onSubmit={Login} className="mt-6">
         <div className="mt-4">
-          <label className="select-none text-xl text-red-500"></label>
+          <label className="select-none text-xl text-red-500">{ }</label>
           <label className="select-none text-xl text-white">Почта</label>
           <input id="email" name="email" type="email" onChange={e => setEmail(e.target.value)} className="block w-full px-4 py-2 mt-2 text-white bg-zinc-700 border rounded-md focus:border-zinc-300 focus:ring-zinc-300 focus:outline-none focus:ring focus:ring-opacity-40" />
         </div>

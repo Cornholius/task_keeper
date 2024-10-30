@@ -1,10 +1,4 @@
 import Link from "next/link";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Task Keeper: Восстановление пароля",
-  description: "Восстановление пароля",
-};
 
 
 export default function Auth_page() {
@@ -24,7 +18,7 @@ export default function Auth_page() {
       </form>
 
       <p className="mt-8 text-sm font-light text-center text-zinc-400">Уже есть аккаунт?
-        <Link href="/auth/auth" className="ml-2 font-medium text-white hover:underline hover:text-green-300 hover:transition hover:duration-00">Войти</Link>
+        <Link href="/auth/login" className="ml-2 font-medium text-white hover:underline hover:text-green-300 hover:transition hover:duration-00">Войти</Link>
       </p>
     </>
   );
