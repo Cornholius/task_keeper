@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation'
 import IsAuthenticated from '@/services/IsAuthenticated'
-import Logout from "@/services/Logout";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import TaskDesk from "@/components/TaskDesk";
@@ -28,7 +27,7 @@ export default function Home() {
 
   return (
     <section className="h-screen w-screen">
-      <Header />
+      <Header user={userName} />
       <Sidebar />
       <TaskDesk />
       

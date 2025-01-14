@@ -11,6 +11,11 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        btn: "#fbbf24"
+
+      },
+      height: {
+        header: "60px"
       },
     },
   },

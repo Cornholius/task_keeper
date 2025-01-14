@@ -40,7 +40,7 @@ async def user(session: AsyncSession = Depends(get_async_session), user: User = 
         user_obj = result.unique().scalars().first()
         # for i in user_obj:
         #     print(i.name, i.task_list)
-        print('>>>', user_obj)
+        print('>>>', user_obj.task_list)
         return user_obj
     else:
         return {"status": 401, "message": "you are not superuser"}
